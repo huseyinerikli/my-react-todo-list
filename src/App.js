@@ -63,8 +63,7 @@ export default function App() {
 		clonedTasks.splice(index, 1);
 
 		setTasks([...clonedTasks]);
-
-		//saveTasks([...clonedTasks]);
+		
 	}
 
 	function loadTasks() {

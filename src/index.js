@@ -2,117 +2,92 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
-
-
-// second component
-class Display extends Component{
-  constructor(props){
+class Display extends Component {
+  constructor(props) {
     super(props);
-    // create state for style
-    this.state ={checked:false};
+    this.state = { checked: false };
 
     this.handleChecked = this.handleChecked.bind(this);
   }
-  
-  handleChecked(e){
 
-    if(this.state.checked === false){
-       this.setState({checked:false});
-          this.setState({checked:true});
+  handleChecked(e) {
+
+    if (this.state.checked === false) {
+      this.setState({ checked: false });
+      this.setState({ checked: true });
 
     }
-    else{
-    this.setState({checked:false});
+    else {
+      this.setState({ checked: false });
     }
-
   }
-  
-  //   handleDelete = (todoId) => {
-  //   const newTodo = todos.filter((todo) => todo.id !== todoId);
-  //   setTodos(newTodo);
-  // };
 
-  handleDel = item => {
-    this.setState(({ todos }) => ({
-      todos: todos.filter(el => el.id !== this.props.item)
+  handleDelete = index => {
+    this.setState(prevState => ({
+      items: prevState.items.filter((_, i) => i !== index)
     }));
   };
 
-
-  render(){
+  render() {
     return (
       <ul>
         <li>
           <input type="checkbox" onChange={this.handleChecked} />
-          <span className={this.state.checked ?"checked":""}>{this.props.item}</span>
-          <button onClick={() => handleDelete(this.props.item)}> X DELETE</button>
+          <span className={this.state.checked ? "checked" : ""}>{this.props.item}</span>
+          <button onClick={() => this.props.onDelete(this.props.index)}>X DELETE</button>
         </li>
-       
       </ul>
     )
   }
 }
 
-
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {items:[] };
-    
+    this.state = { items: [] };
+
     this.handleSubmit = this.handleSubmit.bind(this);
-      
-//  make use of refs in getting user input
-    this.inputItem= React.createRef();
-    
+    this.inputItem = React.createRef();
   }
-  
-  handleSubmit(e){
-    // prevent loading to the server
+
+  handleSubmit(e) {
     e.preventDefault();
+    let inputValue = this.inputItem.current.value;
 
-    // get user value
-    let inputValue =this.inputItem.current.value;
-
-    if(inputValue.trim().length > 0){
-        // update the state 
-        this.setState({items: this.state.items.concat(inputValue)});
-        
-        // reset value
-        this.inputItem.current.value ="";
+    if (inputValue.trim().length > 0) {
+      this.setState({ items: this.state.items.concat(inputValue) });
+      this.inputItem.current.value = "";
     }
-    
-  }  
+  }
 
-//   handleDelete = (todoId) => {
-//     const newTodo = todos.filter((todo) => todo.id !== todoId);
-//     setTodos(newTodo);
-//   };
-  
-    
+  handleDelete = index => {
+    this.setState(prevState => ({
+      items: prevState.items.filter((_, i) => i !== index)
+    }));
+  };
+
   render() {
     let display = this.state.items.map(
-      (item, index)=>{
+      (item, index) => {
 
-      return (<Display item={item} index={index} />)
-      }); 
-    
+        return (<Display key={index} item={item} index={index} onDelete={this.handleDelete} />)
+      });
+
     return (
       <div>
         <h2>Todo List</h2>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" className="todo_text" placeholder="Enter Items..." ref={this.inputItem} />
-        
-          <button className="btn-Add">Add</button>
+          <input type="text" className="todo_text" placeholder="Enter a To do item..." ref={this.inputItem} />
+
+          <button className="btn-Add">+ ADD</button>
         </form>
 
         <hr />
-          {display}
-       </div>
-    ); 
+        {display}
+      </div>
+    );
   }
-  
 }
-  
 
 ReactDOM.render(<App />, document.getElementById('root'));
