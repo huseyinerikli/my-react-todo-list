@@ -75,7 +75,7 @@ class App extends Component {
 
     return (
       <div>
-        <h2>Todo List</h2>
+        <h2>Todo List Application</h2>
 
         <form onSubmit={this.handleSubmit}>
           <input type="text" className="todo_text" placeholder="Enter a To do item..." ref={this.inputItem} />

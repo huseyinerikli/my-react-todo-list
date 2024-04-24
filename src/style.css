@@ -5,9 +5,9 @@ body {
     color: #fff;
   }
   h2{
-  /* padding-left: 30px; */
+  padding-left: 30px; 
   text-align: center;
-  font-size: 2em;
+  font-size: 3em;
   }
   form{
     text-align: center;
@@ -20,6 +20,7 @@ body {
     padding: 5px;
     width:50%;
     border-radius:3px;
+    font-size: 1.8em;
   
   }
   form .btn-Add{
@@ -30,23 +31,31 @@ body {
     font-size: 0.85em;
     text-transform: uppercase;
     color: #ffffff;
+    background-color: rgb(36, 161, 22);
+    font-size: 1.8em;
   }
   ul{
     padding:0px 75px;
+     padding: 10px 30px 10px;
+    
   }
   li{
   list-style: none; 
-  /* font-size: 1.2em; */
+  /*font-size: 1.8em;*/
+  padding: 5px 250px 5px;
   }
   li span{
        font-size: 1.3em;
       letter-spacing: 1px;
-      padding: 10px;
+      padding: 8px;
   }
   span.checked{
     text-decoration: line-through;
+    color: black;
   }
   
   button{
     font-weight: 600;
+    color: white;
+    background-color: red;
   }
