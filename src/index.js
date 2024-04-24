@@ -27,6 +27,16 @@ class Display extends Component{
 
   }
   
+  //   handleDelete = (todoId) => {
+  //   const newTodo = todos.filter((todo) => todo.id !== todoId);
+  //   setTodos(newTodo);
+  // };
+
+  handleDel = item => {
+    this.setState(({ todos }) => ({
+      todos: todos.filter(el => el.id !== this.props.item)
+    }));
+  };
 
 
   render(){
@@ -35,7 +45,7 @@ class Display extends Component{
         <li>
           <input type="checkbox" onChange={this.handleChecked} />
           <span className={this.state.checked ?"checked":""}>{this.props.item}</span>
-          <button onClick={() => handleDelete(todo.id)}> X DELETE</button>
+          <button onClick={() => handleDelete(this.props.item)}> X DELETE</button>
         </li>
        
       </ul>
