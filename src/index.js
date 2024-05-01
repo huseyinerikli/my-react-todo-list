@@ -22,6 +22,8 @@ class Display extends Component {
     }
   }
 
+
+
   handleDelete = index => {
     this.setState(prevState => ({
       items: prevState.items.filter((_, i) => i !== index)
@@ -33,8 +35,14 @@ class Display extends Component {
       <ul>
         <li>
           <input type="checkbox" onChange={this.handleChecked} />
-          <span className={this.state.checked ? "checked" : ""}>{this.props.item}</span>
-          <button onClick={() => this.props.onDelete(this.props.index)}>X DELETE</button>
+          <span className={this.state.checked ? "checked" : ""}>{
+            this.props.item
+            }</span>
+          <button className="btn-Delete" 
+          onClick={() => this.props.onDelete(
+            this.props.index)}>X DELETE
+            </button>
+       
         </li>
       </ul>
     )
@@ -44,7 +52,13 @@ class Display extends Component {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: [] };
+    this.state = { 
+      items: ['Design', 'Develop', 'Test', 'Deploy'],
+    newtask: '',
+      editflag: false,
+      editIndex: null,
+    };
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.inputItem = React.createRef();
@@ -60,6 +74,8 @@ class App extends Component {
     }
   }
 
+
+
   handleDelete = index => {
     this.setState(prevState => ({
       items: prevState.items.filter((_, i) => i !== index)
@@ -70,17 +86,21 @@ class App extends Component {
     let display = this.state.items.map(
       (item, index) => {
 
-        return (<Display key={index} item={item} index={index} onDelete={this.handleDelete} />)
-      });
+        return (<Display key={index} 
+        item={item} 
+        index={index} 
+        onDelete={this.handleDelete} />)
+      }); 
 
     return (
       <div>
         <h2>Todo List Application</h2>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" className="todo_text" placeholder="Enter a To do item..." ref={this.inputItem} />
+          <input type="text" className="todo_text" 
+          placeholder="Enter a To do item..." ref={this.inputItem} />
 
-          <button className="btn-Add">+ ADD</button>
+          <button className="btn-Add">+ ADD ITEM</button>
         </form>
 
         <hr />
