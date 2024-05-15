@@ -65,6 +65,14 @@ body {
     margin-left: 15px;
   }
 
+  .btn-Save{
+    font-weight: 600;
+    color: white;
+    background-color: rgb(22, 128, 25);
+    margin-right: 10px;
+    margin-left: 15px;
+  }
+
   .btn-Delete {
     font-weight: 600;
     color: white;
