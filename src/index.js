@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
+
 class Display extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ class Display extends Component {
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleEditChange = this.handleEditChange.bind(this);
     this.handleEditSave = this.handleEditSave.bind(this);
+    this.handleCancelEdit = this.handleCancelEdit.bind(this);
   }
 
   handleChecked(e) {
@@ -38,10 +40,18 @@ class Display extends Component {
   handleEditSave() {
     this.setState({
       editing: false
-    });
-    // Pass the updated text and index to the parent component
+    });    
     this.props.onEdit(this.props.index, this.state.editText);
   }
+
+  handleCancelEdit() {
+    this.setState({
+      editing: false,
+      editText: this.props.item 
+    });
+  }
+
+
 
   render() {
     return (
@@ -60,20 +70,28 @@ class Display extends Component {
             </span>
           )}
           {this.state.editing ? (
-            <button className="btn-Save" onClick={this.handleEditSave}>
-              Save
-            </button>
-          ) : (
-            <button className="btn-Edit" onClick={this.handleEditClick}>
+            <>
+              <button className="btn-Save" onClick={this.handleEditSave}>
+                Save
+              </button>
+              <button className="btn-Cancel" onClick={this.handleCancelEdit}>
+                Cancel
+              </button>
+            </>
+          ): (
+            <button className="btn-Edit" onClick={this.handleEditClick} >
               Edit
             </button>
+            
           )}
+          
           <button
-            className="btn-Delete"
-            onClick={() => this.props.onDelete(this.props.index)}
-          >
+            className="btn-Delete" 
+            onClick={() => this.props.onDelete(this.props.index)}            
+          >          
             X DELETE
           </button>
+          
         </li>
       </ul>
     );

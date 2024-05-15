@@ -73,6 +73,14 @@ body {
     margin-left: 15px;
   }
 
+  .btn-Cancel{
+    font-weight: 600;
+    color: white;
+    background-color: rgb(159, 127, 32);
+    margin-right: 10px;
+    margin-left: 15px;
+  }
+
   .btn-Delete {
     font-weight: 600;
     color: white;
